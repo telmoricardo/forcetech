@@ -1,0 +1,206 @@
+<?php
+//chamando as classes
+use app\Controller\PedidoController;
+use app\Model\Pedido;
+use app\Util\Helper;
+
+$pedidoController = new PedidoController();
+$pedido = new Pedido();
+$helper = new Helper();
+
+//iniciando as paginação
+if (empty($_GET['pg'])):
+else:
+    $pg = $_GET['pg'];
+endif;
+if (isset($pg)):
+    $pg = $_GET['pg'];
+else:
+    $pg = 1;
+endif;
+
+/*
+* Pegando o cod que esta vindo através da url active = 1
+* o status vai receber o valor 2 = que é inativo
+*/
+$active = filter_input(INPUT_GET, "active", FILTER_SANITIZE_NUMBER_INT);
+if ($active):
+    //retorna o slider 
+    $retornaStatus = $pedidoController->retornaStatusPedido($active);
+    $status = 2;
+    if ($pedidoController->AlterarStatusPedido($active, $status)):
+        echo '<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+                alert ("O status AGUARDANDO!")
+                </SCRIPT>';
+    endif;
+
+endif;
+
+$inactive = filter_input(INPUT_GET, "inactive", FILTER_SANITIZE_NUMBER_INT);
+if ($inactive):
+    //retorna o slider 
+    $retornaStatus = $pedidoController->retornaStatusPedido($inactive);
+    $status = 1;
+    if ($pedidoController->AlterarStatusPedido($inactive, $status)):
+        echo '<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+            alert ("O status PAGO!")
+            </SCRIPT>';
+    endif;
+endif;
+
+
+//quantidade de postagem para visualizar por pagina
+$quantidade = 4;
+$inicio = ($pg * $quantidade) - $quantidade;
+$listaPedido = $pedidoController->ListarPedidos($inicio, $quantidade);
+
+?>
+<div class="main-panel">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a class="navbar-brand" href="#">Lista dos Produtos</a>
+                
+                <?php                   
+                ?>
+            </div>
+            <?php require_once './inc/header_top.php'; ?>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">                    
+                    <div class="card">                        
+                        <div class="content table-responsive table-full-width">
+                            <table class="table table-success">
+                                <thead>
+                                    <th>Código</th>
+                                    <th>Cliente</th>
+                                    <th>Valor do Frete</th>
+                                    <th>Valor do Pedido</th>
+                                    <th>Status</th>
+                                    <th>Atualizado em</th>                                    
+                                    <th>Detalhes</th>
+                                </thead>
+                                
+                                <tbody>
+                                    <?php
+                                        if($listaPedido == null):
+                                            else:
+                                                foreach ($listaPedido as $pedido):
+                                    ?>
+                                    <tr>
+                                        <td><?= $pedido->getPedidos_id_moip();?></td>
+                                        <td><?= $pedido->getPedidos_cliente()->getNome();?></td>
+                                        <td>R$ <?= number_format($pedido->getPedidos_frete(), 2, ",", ".");?></td>
+                                        <td>R$ <?= number_format($pedido->getPedidos_total(), 2, ",", ".");?></td>
+                                        <td>
+                                            <?php
+                                                if($pedido->getPedidos_status() == 1):
+                                                    echo "<a class='btn btn-success' title='Pago' href='?pagina=pedido_list&active={$pedido->getId()}'><i class='ti-check'></i>";
+                                                else:
+                                                    echo "<a class='btn btn-danger' title='Aguardando' href='?pagina=pedido_list&inactive={$pedido->getId()}'><i class='ti-close'></i></a>";
+                                                endif;
+                                            
+                                            ?>
+                                        </td>                                        
+                                        <td><?= $helper->converteData($pedido->getPedidos_data());?></td>                                        
+                                        <td><a class="btn btn-info" title="Detalhes do Pedido" href="?pagina=pedido_detalhes&cod=<?= $pedido->getId();?>"><i class="ti-archive"></i></a></td>
+                                    </tr>                                    
+                                    <?php
+                                        endforeach;
+                                        endif;
+                                    ?>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <nav aria-label="Page navigation">
+                <?php
+                $totalRegistros = $pedidoController->RetornaQtdPedido();
+                $totalRegistros;
+                if ($totalRegistros <= $quantidade):
+                    
+                else:
+                    $paginas = ceil($totalRegistros / $quantidade);
+                    $links = 5;
+
+                    if (isset($i)):
+                    else:
+                        $i = '1';
+                    endif;
+                ?>
+                <!-- ativação da paginação-->
+                    <style>
+                    <?php
+                    if (isset($_GET['pg'])):
+                        $num_pg = $_GET['pg'];
+                    endif;
+                    ?>
+                        .pagination a.active<?php echo $num_pg; ?>{background-color: #069; color: #fff; }
+                    </style>
+                <ul class="pagination">
+                    <li><a href="dashboard.php?pagina=pedido_list&pg=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <?php
+                    if (isset($_GET['pg'])):
+                        $num_pg = $_GET['pg'];
+                    endif;
+
+                    for ($i = $pg - $links; $i <= $pg - 1; $i++):
+                        if ($i <= 0):
+                        else:
+                            ?>                            
+                            <li class="active<?= $i; ?>">
+                                <a href="dashboard.php?pagina=pedido_list&pg=<?= $i; ?>"><?= $i; ?> 
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                        <?php
+                        endif;
+                    endfor;
+                    ?>       
+                    <li>
+                        <a class="active<?= $i; ?>" href="dashboard.php?pagina=pedido_list&pg=<?= $i; ?>"><?= $pg; ?></a>
+                    </li>
+                    <?php
+                    for ($i = $pg + 1; $i <= $pg = $links; $i++):
+                        if ($i > $paginas):
+                        else:
+                            ?>
+                            <li>
+                                <a class="active<?= $i; ?>" href="dashboard.php?pagina=pedido_list&pg=<?= $i; ?>"><?= $i; ?></a>
+                            </li>
+                        <?php
+                        endif;
+                    endfor;
+                    ?>                    
+                    <li>
+                        <a href="dashboard.php?pagina=pedido_list&pg=<?= $paginas; ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+                <?php
+                endif;
+                ?>
+                
+            </nav>
+        </div>
+        
+        
+    </div>
+    
+    
+</div>
+

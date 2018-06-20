@@ -1,0 +1,323 @@
+<?php
+
+//chamando as classes
+use app\Controller\PedidoController;
+use app\Controller\PedidoProdutoController;
+use app\Util\Helper;
+
+//instanciando os objetos
+$produtoController = new PedidoController();
+$pedidoProdutoController = new PedidoProdutoController();
+$helper = new Helper();
+
+$id = filter_input(INPUT_GET, "cod", FILTER_SANITIZE_NUMBER_INT);                  
+                    
+$retornoPedido = $produtoController->retornaPedidoId($id);
+
+if($retornoPedido == null):
+    
+else:   
+
+    //pedido
+    $orderId = $retornoPedido->getPedidos_id_moip();
+    $orderValor = $retornoPedido->getPedidos_total();
+    $orderData = $retornoPedido->getPedidos_data();
+    $orderStatus = $retornoPedido->getPedidos_status();
+    $orderTipoFrete = $retornoPedido->getPedidos_frete_tipo();
+    $orderCliente = $retornoPedido->getPedidos_cliente()->getNome();
+    $orderCpf = $retornoPedido->getPedidos_cliente()->getDocumento();
+    $orderTelefone = $retornoPedido->getPedidos_cliente()->getTelefone();
+    $orderCelular = $retornoPedido->getPedidos_cliente()->getCelular();
+    $orderNascimento = $retornoPedido->getPedidos_cliente()->getNascimento();
+    $orderRua = $retornoPedido->getPedidos_cliente()->getRua();
+    $orderNumero = $retornoPedido->getPedidos_cliente()->getNumero();
+    $orderComplemento = $retornoPedido->getPedidos_cliente()->getComplemento();
+    $orderCep = $retornoPedido->getPedidos_cliente()->getCep();
+    $orderBairro = $retornoPedido->getPedidos_cliente()->getBairro();
+    $orderCidade = $retornoPedido->getPedidos_cliente()->getCidade();
+    $orderUf = $retornoPedido->getPedidos_cliente()->getUf();
+    $orderEmail = $retornoPedido->getPedidos_cliente()->getEmail();
+
+    $entregaEndereco = $retornoPedido->getPedidos_endereco();
+    $entregaNumero = $retornoPedido->getPedidos_numero();
+    $entregaCep = $retornoPedido->getPedidos_cep();
+    $entregaComplemento = $retornoPedido->getPedidos_complemento();
+    $entregaBairro = $retornoPedido->getPedidos_bairro();
+    $entregaCidade = $retornoPedido->getPedidos_cidade();
+    $entregaEstado = $retornoPedido->getPedidos_uf();
+    //pegando pedidoPorduto
+    $retornarPedidoProduto = $pedidoProdutoController->produtoPedidoRelacionado($orderId);
+?>
+<div class="main-panel">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a class="navbar-brand" href="#">Detalhes do Pedido</a>
+            </div>
+            <?php require_once './inc/header_top.php'; ?>
+        </div>
+    </nav>
+
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <?php                                        
+                    
+                ?>
+
+                <div class="col-lg-12 col-md-7">
+                    <div class="card">
+                        <div class="header">
+                            <h4 class="title">Ordem do Pedido: <strong><?= $orderId; ?></strong></h4>                                
+                        </div>
+
+                        <div class="content">                                                              
+                            <hr>
+                            <div class="row">                                    
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Valor do Pedido</label>
+                                        <h4 class="title">R$ <?= number_format($orderValor, 2, ",", "."); ?></h4>                                               
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Data</label>
+                                        <h4 class="title"><?= $helper->converteData($orderData); ?></h4>                                               
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Frete</label>
+                                        <h4 class="title"><?= strtoupper($orderTipoFrete); ?></h4>                                               
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <h4 class="title"><?= ($orderStatus == 1) ? 'Pago' : 'Aguardando'; ?></h4>                                               
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Comprador</label>
+                                        <h4 class="title"><?= $orderCliente; ?></h4>                                               
+                                    </div>
+                                </div>                                        
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <h3 style="margin: 10px;" class="strong">Descritivo</h3>
+                                <div class="col-md-1">                                            
+                                    <div class="form-group">
+                                        <label>Quantidade</label>
+                                        <?php                                        
+                                            foreach ($retornarPedidoProduto as $pedidoproduto):
+                                        ?>
+                                        <h4 class="title"><?= $pedidoproduto->getPedidos_produto_quantidade(); ?></h4> 
+                                        <?php
+                                            endforeach;
+                                        
+                                        ?>
+                                    </div>
+                                </div>    
+                                <div class="col-md-6">                                            
+                                    <div class="form-group">
+                                        <label>Produtos</label>
+                                        <?php 
+                                        if($retornarPedidoProduto == null):
+                                            echo '<h4 class="title">Não existem produtos no pedido</h4>';
+                                        else:
+                                            foreach ($retornarPedidoProduto as $pedidoproduto):
+                                        ?>
+                                        <h4 class="title"><?= $pedidoproduto->getPedidos_produto_nome(); ?> </h4> 
+                                        <?php
+                                            endforeach;
+                                        endif;
+                                        ?>
+                                    </div>
+                                </div> 
+                                
+                                <div class="col-md-3">                                            
+                                    <div class="form-group">
+                                        <label>Produtos</label>
+                                        <?php 
+                                        if($retornarPedidoProduto == null):
+                                            echo '<h4 class="title">Não existem produtos no pedido</h4>';
+                                        else:
+                                            foreach ($retornarPedidoProduto as $pedidoproduto):
+                                        ?>
+                                        <h4 class="title">R$ <?= number_format($pedidoproduto->getPedidos_produto_subtotal(), 2, ",", "."); ?> </h4> 
+                                        <?php
+                                            endforeach;
+                                        endif;
+                                        ?>
+                                    </div>
+                                </div>                                        
+                                                                    
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <h4 style="margin: 10px;" class="strong">Dados do Comprador</h4>                                        
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label>CPF</label>
+                                        <h4 class="title"><?= $orderCpf; ?></h4> 
+                                    </div>
+                                </div>                                
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Data de Nascimento</label>
+                                        <h4 class="title"><?= $helper->converteData($orderNascimento); ?></h4> 
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                                                     
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>E-mail</label>
+                                        <h4 class="title"><?= $orderEmail; ?></h4> 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Telefone</label>
+                                        <h4 class="title"><?= $orderTelefone; ?></h4> 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Celular</label>
+                                        <h4 class="title"><?= $orderCelular; ?></h4> 
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Endereço</label>
+                                        <h4 class="title"><?= $orderRua; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Número</label>
+                                        <h4 class="title"><?= $orderNumero; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>CEP</label>
+                                        <h4 class="title"><?= $orderCep; ?></h4> 
+                                    </div>
+                                </div>                                       
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Complemento</label>
+                                        <h4 class="title"><?= $orderComplemento; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Bairro</label>
+                                        <h4 class="title"><?= $orderBairro; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Cidade</label>
+                                        <h4 class="title"><?= $orderCidade; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <h4 class="title"><?= $orderUf; ?></h4> 
+                                    </div>
+                                </div>                                     
+                            </div>
+                            
+                            <hr> 
+                            
+                            <div class="row">
+                                <h4 style="margin: 10px;" class="strong">Endereço de Entrega</h4>
+                                <div class="col-md-6">                                       
+                                    <div class="form-group">
+                                        <label>Endereço</label>
+                                        <h4 class="title"><?= $entregaEndereco; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Número</label>
+                                        <h4 class="title"><?= $entregaNumero; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>CEP</label>
+                                        <h4 class="title"><?= $entregaCep; ?></h4> 
+                                    </div>
+                                </div>                                       
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Complemento</label>
+                                        <h4 class="title"><?= $entregaComplemento; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Bairro</label>
+                                        <h4 class="title"><?= $entregaBairro; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Cidade</label>
+                                        <h4 class="title"><?= $entregaCidade; ?></h4> 
+                                    </div>
+                                </div>                                       
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Estado</label>
+                                        <h4 class="title"><?= $entregaEstado; ?></h4> 
+                                    </div>
+                                </div>                                     
+                            </div>  
+
+                            <hr>                                
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+<?php
+endif;
+?>
+
