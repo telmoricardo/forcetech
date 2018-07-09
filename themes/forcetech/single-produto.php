@@ -82,7 +82,7 @@ else:
                             <p class="tipo_galery">ou</p>                            
                             <p class="price_galery"><b>R$</b> <?= number_format($desconto, 2, ",", ".");?></p>
                             <p class="tipo_galery">À vista (Boleto ou Transferêcia)</p>
-                            <a href="<?= HOME; ?>/carrinho/add/<?= $codProd; ?>" class="btn btn-blue"><i class="fa fa-cart-plus"></i>  Adicionar Carrinho</a>
+                            <a href="<?= HOME; ?>/carrinho/add/<?= $codProd; ?>" class="btn btn-blue"><i class="fa fa-cart-plus"></i>  COMPRAR</a>
                         </div>
                         
                     </article>

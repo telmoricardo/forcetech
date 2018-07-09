@@ -1,3 +1,53 @@
+<?php
+$usuarioController = new UsuarioController();
+$usuario = new Usuario();
+$helper = new Helper();
+
+$resultado = "";
+
+$btnUsuario = filter_input(INPUT_POST, "btnUsuario", FILTER_SANITIZE_STRING);
+if ($btnUsuario):
+    $usuario->setNome(filter_input(INPUT_POST, "txtNome", FILTER_SANITIZE_STRING));
+//convertendo data Y-m-d
+    $dataNasc = $helper->converteData(filter_input(INPUT_POST, "data_nasc", FILTER_SANITIZE_STRING));
+    $usuario->setNascimento($dataNasc);
+    $usuario->setEmail(filter_input(INPUT_POST, "txtEmail", FILTER_SANITIZE_STRING));
+    $usuario->setDocumento(filter_input(INPUT_POST, "txtCpf", FILTER_SANITIZE_STRING));
+    $cpf = $usuario->getDocumento();
+    $usuario->setNivel(3);
+    $usuario->setCelular(filter_input(INPUT_POST, "telephone_booking2", FILTER_SANITIZE_STRING));
+    $usuario->setTelefone(filter_input(INPUT_POST, "telephone_booking", FILTER_SANITIZE_STRING));
+    $usuario->setCep(filter_input(INPUT_POST, "endereco_cep", FILTER_SANITIZE_STRING));
+    $usuario->setRua(filter_input(INPUT_POST, "endereco_endereco", FILTER_SANITIZE_STRING));
+    $usuario->setNumero(filter_input(INPUT_POST, "endereco_n", FILTER_SANITIZE_NUMBER_INT));
+    $usuario->setBairro(filter_input(INPUT_POST, "endereco_bairro", FILTER_SANITIZE_STRING));
+    $usuario->setCidade(filter_input(INPUT_POST, "endereco_cidade", FILTER_SANITIZE_STRING));
+    $usuario->setUf(filter_input(INPUT_POST, "endereco_uf", FILTER_SANITIZE_STRING));
+    $usuario->setComplemento(filter_input(INPUT_POST, "endereco_complemento", FILTER_SANITIZE_STRING));
+    $usuario->setEmail_log($usuario->getEmail());
+    $usuario->setSenha_log(filter_input(INPUT_POST, "txtSenha", FILTER_SANITIZE_STRING));
+    $usuario->setSenha_cod(filter_input(INPUT_POST, "txtSenha2", FILTER_SANITIZE_STRING));
+    $usuario->setData_log(date('Y-m-d H:i:s'));
+    $usuario->setStatus(1);
+
+    $retornaDados = $usuarioController->verificarUsuario($cpf);
+    if ($retornaDados != null):
+        $resultado = '<div class="msg-error">            
+            <span><b> Opss, usuário já foi cadastro </b></span>
+        </div>';
+    else:
+        if ($usuarioController->Cadastrar($usuario)):
+            $insertGoTo = HOME . '/login';
+            echo"<script language='javascript' type='text/javascript'>alert('Cadastrado com sucesso, entre com seu email e com senha!');</script>";
+            header("refresh:0;url={$insertGoTo}");
+        else:
+            $resultado = '<div class="msg-error">            
+                <span><b> Favor preencha todos os dados </b></span>
+            </div>';
+        endif;
+    endif;
+endif;
+?>
 <div class="container">
     <div class="content">
         <div class="row checkout-row">
@@ -6,6 +56,7 @@
                     <div class="form_title">
                         <h3><strong>1</strong>Detalhes Importantes</h3>
                         <p>Alguns dados básicos</p>
+
                     </div>
 
                     <div class="step">                        
@@ -38,7 +89,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="row">
                             <div class="column column-6">
@@ -128,16 +178,17 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-blue j_button" id="cadastroUsuario" name="btnUsuario" style="margin-right: 12px; text-align: center; padding: 11px;">
-                            CADASTRE-SE
+                        <button class="btn btn-blue" id="cadastroUsuario" style="width: 300px; margin-bottom: 8px;">
+                            Preencha os dados
                         </button>                       
-                        
+                        <!--<input type="button" style="width: 350px;" class="btn btn-blue" value="Cadastrar" id="cadastroUsuario"/>-->
+                        <input type="submit" style="width: 300px; display: none; margin-bottom: 8px;" class="btn btn-green" name="btnUsuario" id="btnUsuario" value="Cadastrar"/>
+
+
+
                         <div class="row">
-                            <div class="column column-12">
-                                
-                                <div class="resultado">
-                                    <div class="msg"></div>
-                                </div>                 
+                            <div class="column column-12">                                
+                                <?php echo $resultado; ?>                
                             </div>                        
                         </div>
                     </div>
@@ -147,5 +198,5 @@
         </div>
     </div>
 </div>
-<script src="<?= HOME;?>/_cdn/jquery-3.2.1.min.js"></script> 
-<script src="<?= HOME;?>/_cdn/checkCadastre.js"></script>
+<script src="<?= HOME; ?>/_cdn/jquery-3.2.1.min.js"></script> 
+<script src="<?= HOME; ?>/_cdn/checkCadastre.js"></script>

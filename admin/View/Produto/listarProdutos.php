@@ -76,7 +76,7 @@ if ($btnExcluir):
 endif;
 
 //quantidade de postagem para visualizar por pagina
-$quantidade = 8;
+$quantidade = 10;
 $inicio = ($pg * $quantidade) - $quantidade;
 
 $listaProduto = $produtoController->ListarProduto($inicio, $quantidade);
@@ -102,7 +102,7 @@ $listaProduto = $produtoController->ListarProduto($inicio, $quantidade);
                             <th>ID</th>
                             <th>Imagem</th>
                             <th>Titulo</th>
-                            <th>Breve Descrição</th>
+                            <th>Preço</th>
                             <th>Status</th>
                             <th>Galeria</th>
                             <th>Remover</th>
@@ -121,7 +121,7 @@ $listaProduto = $produtoController->ListarProduto($inicio, $quantidade);
                                             <td><?= $prod->getProduto_cod(); ?></td>
                                             <td><img src="../upload/<?= $prod->getProduto_thumb(); ?>" width="100"></td>
                                             <td><?= $prod->getProduto_nome(); ?></td>
-                                            <td><?= $prod->getProduto_breve(); ?></td>
+                                            <td>R$ <?= number_format($prod->getProduto_preco(), 2, ",", ". "); ?></td>
                                             <td>
                                                 <?php
                                                 if ($prod->getProduto_status() == 1):

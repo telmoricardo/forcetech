@@ -13,9 +13,13 @@ $data = "";
 $btnExcluir = filter_input(INPUT_GET, "del", FILTER_SANITIZE_NUMBER_INT);
 if($btnExcluir):    
     if ($usuarioController->Excluir($btnExcluir)):
-        $resultado = "<div class=\"alert alert-success\">A categoria </b> foi removido com sucesso</div>";
+        echo '<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+                alert ("Removido com sucesso!")
+                </SCRIPT>';
     else:
-        $resultado = "<div class=\"alert alert-danger\">Erro ao remover a categoria</div>";
+       echo '<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+                alert ("Erro ao remover!")
+                </SCRIPT>';
     endif;
 endif;
 
@@ -156,7 +160,7 @@ $listarUsuario = $usuarioController->ListarUsuario($inicio, $quantidade);
                         .pagination a.active<?php echo $num_pg; ?>{background-color: #069; color: #fff; }
                     </style>
                 <ul class="pagination">
-                    <li><a href="dashboard.php?pagina=listarUser&pg=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li><a href="painel.php?pagina=listarUser&pg=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
                     <?php
                     if (isset($_GET['pg'])):
                         $num_pg = $_GET['pg'];
@@ -167,7 +171,7 @@ $listarUsuario = $usuarioController->ListarUsuario($inicio, $quantidade);
                         else:
                             ?>                            
                             <li class="active<?= $i; ?>">
-                                <a href="dashboard.php?pagina=listarUser&pg=<?= $i; ?>"><?= $i; ?> 
+                                <a href="painel.php?pagina=listarUser&pg=<?= $i; ?>"><?= $i; ?> 
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
@@ -176,7 +180,7 @@ $listarUsuario = $usuarioController->ListarUsuario($inicio, $quantidade);
                     endfor;
                     ?>       
                     <li>
-                        <a class="active<?= $i; ?>" href="dashboard.php?pagina=listarUser&pg=<?= $i; ?>"><?= $pg; ?></a>
+                        <a class="active<?= $i; ?>" href="painel.php?pagina=listarUser&pg=<?= $i; ?>"><?= $pg; ?></a>
                     </li>
                     <?php
                     for ($i = $pg + 1; $i <= $pg = $links; $i++):
@@ -184,14 +188,14 @@ $listarUsuario = $usuarioController->ListarUsuario($inicio, $quantidade);
                         else:
                             ?>
                             <li>
-                                <a class="active<?= $i; ?>" href="dashboard.php?pagina=listarUser&pg=<?= $i; ?>"><?= $i; ?></a>
+                                <a class="active<?= $i; ?>" href="painel.php?pagina=listarUser&pg=<?= $i; ?>"><?= $i; ?></a>
                             </li>
                         <?php
                         endif;
                     endfor;
                     ?>                    
                     <li>
-                        <a href="dashboard.php?pagina=listarUser&pg=<?= $paginas; ?>" aria-label="Next">
+                        <a href="painel.php?pagina=listarUser&pg=<?= $paginas; ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

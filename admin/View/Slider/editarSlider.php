@@ -38,17 +38,15 @@ if($retornoSlider == null):
     echo '';
 else:
     $titulo = $retornoSlider->getSlider_titulo();
-    $status = $retornoSlider->getSlider_status();
+    $statusSlider = $retornoSlider->getSlider_status();
     $link = $retornoSlider->getSlider_link();
-    $tipo = $retornoSlider->getSlider_tamanho();
+    $tamanhoSlider = $retornoSlider->getSlider_tamanho();
 
 ?>
 
    <div class="content">
         <div class="container-fluid">
-            <div class="row">              
-
-                    
+            <div class="row">            
                 <div class="col-lg-12 col-md-7">
                     <div class="card">
                         <div class="header">
@@ -68,30 +66,19 @@ else:
                                             <label for="exampleInputEmail1">Status</label>
                                             <select name="slStatus" class="form-control border-input">
                                                 <?php
-                                                    if ($status == 1):
-                                                        ?>
-                                                        <option value="1" selected='selected'>Ativo</option>
-                                                        <?php
-                                                    else:
-                                                        ?>
-                                                        <option value="2" selected='selected'>Bloqueado</option>
-                                                    <?php
-                                                    endif;
-                                                    if ($status != 1):
-                                                        ?>
-                                                        <option value="1" <?php $status == 1 ? "selected='selected'" : "" ?>>Ativo</option>
-                                                        <?php
-                                                    else:
-                                                        ?>
-                                                        <option value="2" <?php $status == 2 ? "selected='selected'" : "" ?>>Bloqueado</option>
-                                                    <?php
-                                                    endif;
+                                                    $status = array('1' => 'Ativo', '2' => 'Bloqueado');                                                    
+                                                    foreach ($status as $key => $value):                                                      
+                                                        $esseEhOStatus = $statusSlider == $key;
+                                                        $selecao = $esseEhOStatus ? "selected='selected'" : ''; 
+                                                ?>
+                                                    <option value="<?= $key; ?>" <?= $selecao?>><?= $value ?></option>
+                                                <?php
+                                                   endforeach;
                                                 ?>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-9">
                                         <div class="form-group">
@@ -104,26 +91,16 @@ else:
                                             <label>Slider</label>
                                             <select name="slSlider" class="form-control border-input">
                                                 <?php
-                                                    if ($tipo == "p"):
-                                                        ?>
-                                                        <option value="p" selected='selected'>Slider Pequeno</option>
-                                                        <?php
-                                                    else:
-                                                        ?>
-                                                        <option value="g" selected='selected'>Slider Grande</option>
-                                                    <?php
-                                                    endif;
-                                                    if ($tipo != "p"):
-                                                        ?>
-                                                        <option value="p" <?php $tipo == "p" ? "selected='selected'" : "" ?>>Slider Pequeno</option>
-                                                        <?php
-                                                    else:
-                                                        ?>
-                                                        <option value="g" <?php $tipo == "g" ? "selected='selected'" : "" ?>>Slider Grande</option>
-                                                    <?php
-                                                    endif;
-                                                    
+                                                $tamanhos = array("Pequeno", "Médio", "Grande", "Promoção");
+                                                foreach ($tamanhos as $tamanho):
+                                                    $esseEhOTamanho = $tamanhoSlider  == $tamanho;
+                                                    $selecao = $esseEhOTamanho ? "selected='selected'" : '';                                                
                                                 ?>
+                                                <option value="<?= $tamanho; ?>" <?= $selecao?>><?= $tamanho ?></option>
+                                                <?php
+                                                    endforeach;
+                                                ?>
+                                                
                                             </select>
                                         </div>
                                     </div>

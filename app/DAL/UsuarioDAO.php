@@ -88,6 +88,20 @@ class UsuarioDAO {
             endif;
         }
     }
+    //excluir usuario
+    public function Excluir($cod) {
+        try {
+            $sql = "DELETE FROM tb_usuarios WHERE cod = :cod";
+            $param = array(":cod" => $cod);
+            return $this->pdo->ExecuteNonQuery($sql, $param);
+        } catch (PDOException $e) {
+            if ($this->debug):
+                echo "Erro {$e->getMessage()}, LINE {$e->getLine()}";
+            else:
+                return null;
+            endif;
+        }
+    }
 
     //listar todos os usuarios
     public function ListarUsuario($inicio = null, $quantidade = null) {
@@ -282,5 +296,30 @@ class UsuarioDAO {
             endif;
         }
     }
+    
+    /*verificar sem possui usuario ja cadastrado*/
+    public function verificarUsuario($cpf) {
+        try {
+            $sql = "SELECT * FROM tb_usuarios WHERE user_documento = :cpf";
+            $param = array(":cpf" => $cpf);
+            //Data Table
 
+            $dt = $this->pdo->ExecuteQueryOneRow($sql, $param);
+            if ($dt != null) {
+                $usuario = new Usuario();
+                $usuario->setCod($dt["cod"]);
+                $usuario->setNome($dt["user_nome"]);
+                $usuario->setNivel($dt["user_nivel"]);
+                return $usuario;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            if ($this->debug):
+                echo "Erro {$e->getMessage()}, LINE {$e->getLine()}";
+            else:
+                return null;
+            endif;
+        }
+    }
 }

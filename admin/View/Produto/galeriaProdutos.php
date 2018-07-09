@@ -21,7 +21,7 @@ if(filter_input(INPUT_POST, "btnGaleria", FILTER_SANITIZE_STRING)) {
     if ($imagemController->CadastrarImagens($listaImagem)) {
         ?>
         <script>
-            document.location.href = "?pagina=product_gallery&cod=<?= $codPost; ?>";
+            document.location.href = "?pagina=galeriaProdutos&cod=<?= $codPost; ?>";
         </script>
         <?php
     } else {
@@ -45,7 +45,7 @@ if (filter_input(INPUT_GET, "del", FILTER_SANITIZE_NUMBER_INT)) {
             unlink("../upload/galeria/{$nomeImagem}");
             ?>
             <script>
-               document.location.href = "?pagina=product_gallery&cod=<?= filter_input(INPUT_GET, "cod", FILTER_SANITIZE_NUMBER_INT); ?>";
+               document.location.href = "?pagina=galeriaProdutos&cod=<?= filter_input(INPUT_GET, "cod", FILTER_SANITIZE_NUMBER_INT); ?>";
             </script>
             <?php
         } else {
@@ -105,7 +105,7 @@ $listaImagem = $imagemController->CarregarImagensPost(filter_input(INPUT_GET, "c
                                         foreach ($listaImagem as $imagem) :
                                             ?>
                                             <img style="margin-bottom:15px; margin-left: 25px;" src="../upload/galeria/<?= $imagem->getImagem()?>" width="220" title="<?= $imagem->getCod()?>"/>
-                                            <a title='Excluir Imagem!'  href='?pagina=product_gallery&cod=<?= $codPost; ?>&del=<?= $imagem->getCod(); ?>'<i class="fa fa-times-circle" style="font-size: 1.4em; padding: 0; position: relative; top: -20px; right: 30px;"></i></a>
+                                            <a title='Excluir Imagem!'  href='?pagina=galeriaProdutos&cod=<?= $codPost; ?>&del=<?= $imagem->getCod(); ?>'<i class="fa fa-times-circle" style="font-size: 1.4em; padding: 0; position: relative; top: -20px; right: 30px;"></i></a>
                                     <?php
                                         endforeach;
                                     endif;

@@ -28,16 +28,16 @@ if ($usuarioLogado == true):
 
 
         <!-- Bootstrap core CSS     -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="<?= BASEADMIN?>/assets/css/bootstrap.min.css" rel="stylesheet" />
 
         <!-- Animation library for notifications   -->
-        <link href="assets/css/animate.min.css" rel="stylesheet"/>
+        <link href="<?= BASEADMIN?>/assets/css/animate.min.css" rel="stylesheet"/>
 
         <!--  Paper Dashboard core CSS    -->
-        <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+        <link href="<?= BASEADMIN?>/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
         <!--  CSS for Demo Purpose, don't include it in your project     -->
-        <link href="assets/css/demo.css" rel="stylesheet" />
+        <link href="<?= BASEADMIN?>/assets/css/demo.css" rel="stylesheet" />
 
         <!--  Fonts and icons     -->
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -218,8 +218,11 @@ if ($usuarioLogado == true):
     </body>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="assets/js/bootstrap-checkbox-radio.js"></script>
     <!--  Charts Plugin -->

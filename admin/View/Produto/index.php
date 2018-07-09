@@ -148,15 +148,7 @@ $function = new Functions();
                    $listarProdutos = $produtoController->ListProductType($codTipo);
             ?>
             <section class="section-product">
-                <h1 class="product-text">
-                <?php 
-                if($codTipo == "2"):
-                    echo 'Promoções do Dia';
-                else:
-                    echo $tipo->getTipo_nome();
-                endif;
-                ?>
-                </h1>                
+                <h1 class="product-text"><?= $tipo->getTipo_nome()?></h1>                
                 <div class="product-carrousel">
                     <div class="jcarousel-product">
                         <div class="pcarousel">

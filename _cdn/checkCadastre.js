@@ -1,13 +1,14 @@
 $(document).ready(function () {
     
-    btnCadastro = $(".form");
-    botao = $('#cadastroUsuario');
+    btnCadastro = $("#cadastroUsuario");
+    btnValidar = $("#btnUsuario");
+//    botao = $('#cadastroUsuario');
+//
+//    var BASE = "php/crud.php";
+//
+//    var cadastro = $('.form');
 
-    var BASE = "php/crud.php";
-
-    var cadastro = $('.form');
-
-    btnCadastro.submit(function (event) {
+    btnCadastro.click(function (event) {
         event.preventDefault();
         
         //Campos obrigatórios
@@ -104,31 +105,33 @@ $(document).ready(function () {
         }
 
         if (nomeCompleto != null && email != null) {
-            
-            cadastro.submit(function () {
-                var formDados = new FormData($(this)[0]);
-                $.ajax({
-                    url: BASE,
-                    type: 'POST',
-                    cache: false,
-                    data: formDados,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                       
-                        botao.delay(300).fadeOut("slow");
-                        $(".resultado").html(data);
-                        url = "https://localhost/works/cel/login";
-                        var delay = 1000;
-                        setTimeout(function () {
-                            window.location = url;
-                        }, delay);                        
-                   
-                    },
-                    dataType: 'html'
-                });
-                return false;
-            });
+            btnCadastro.hide();
+            btnValidar.show();
+//            
+//            cadastro.submit(function () {
+//                var formDados = new FormData($(this)[0]);
+//                $.ajax({
+//                    url: BASE,
+//                    type: 'POST',
+//                    cache: false,
+//                    data: formDados,
+//                    contentType: false,
+//                    processData: false,
+//                    success: function (data) {
+//                       
+//                        botao.delay(300).fadeOut("slow");
+//                        $(".resultado").html(data);
+//                        url = "https://localhost/works/cel/minha-conta";
+//                        var delay = 1000;
+//                        setTimeout(function () {
+//                            window.location = url;
+//                        }, delay);                        
+//                   
+//                    },
+//                    dataType: 'html'
+//                });
+//                return false;
+//            });
         }
     });
 });

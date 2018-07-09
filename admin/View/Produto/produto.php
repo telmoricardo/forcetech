@@ -216,7 +216,7 @@ endif;
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Estoque</label>
-                                            <input type="text" class="form-control border-input" name="txtEstoque" placeholder="Código do Produto" value="">
+                                            <input type="text" class="form-control border-input" name="txtEstoque" placeholder="Código do Produto" value="Quantidade em Estoque">
                                         </div>
                                     </div>
 

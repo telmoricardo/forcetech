@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" type="<?= INCLUDE_PATH; ?>/img/png" href="img/favicon.png" />
+        <link rel="icon" type="<?= INCLUDE_PATH; ?>/img/png" href="<?= INCLUDE_PATH; ?>/img/favicon.png" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
         <link href="<?= INCLUDE_PATH; ?>/css/toastr.min.css" media="all" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="<?= INCLUDE_PATH; ?>/css/reset.css">
@@ -63,9 +63,6 @@
                             ?>
                         </ul>
                     </div>
-
-
-
                     <div class=" content">
                         <!--<! ------------------------------- LOGO -------------------------------->
                         <div class="logo">
@@ -260,88 +257,102 @@
             <footer class="container">                       
                 <div class="content main_footer">
                     <section class="rede_social">
-                        <div class="fb-page" data-href="https://www.facebook.com/Forcetech.Oficial/" data-tabs="timeline" data-height="230" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="https://www.facebook.com/Forcetech.Oficial/" class="fb-xfbml-parse-ignore">
-                                <a href="https://www.facebook.com/Forcetech.Oficial/">Forcetech</a>
-                            </blockquote>
-                        </div>                                      
+                        <a href="https://www.facebook.com/Forcetech.Oficial/" target="_blank">
+                            <img src="<?= INCLUDE_PATH; ?>/img/facebook-forcetech.jpg" alt="Facebook" title="Facebook"/>
+                        </a>
+                        
+                        <div class="box_rede">                            
+                            <ul>                                
+                                <li><a href="https://www.instagram.com/forcetech.oficial/" target="_blank"><img src="<?= INCLUDE_PATH; ?>/img/icons/instan.png" alt=""/></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCOdewMxJHcFfiiBx6Wk2pwQ?view_as=subscriber" target="_blank"><img src="<?= INCLUDE_PATH; ?>/img/icons/tube.png" alt=""/></a></li>
+                            </ul>                            
+                        </div>
                     </section>
 
                     <section class="sec_contato">
-                        <h1>Contato</h1>
-                        <p> (61) 3797-8388 / 99670-8388</p> 
-                        <p>Horário de atendimento das 09:00 as 18:30</p>
-                        <p>De segunda à sexta-feira</p>
-                        <p>Forcetech Comercio de Eletrônicos LTDA</p> 
-                        <p>CNPJ 28.655.997/0001-37</p> 
-                        <p> QS1, Rua 210, Lote 40, Torre B, Taguatinga Shopping</p>
-
-
-                        <div class="box_rede">                                                    
-                            <a class="box face" href="#">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/face.png" alt=""/>
-                            </a>                                                    
-
-                            <a class="box instan" href="#">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/instan.png" alt=""/>
-                            </a>
-
-                            <a class="box tube" href="#">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/tube.png" alt=""/>
-                            </a>
+                        <div class="sec_contato_text">
+                            <h1>Contato</h1>
+                            <p class="telefones"> (61) 3797-8388 / 99670-8388</p> 
+                            <p>Horário de atendimento das 09:00 as 18:30</p>
+                            <p>De segunda à sexta-feira</p>
+                            <p>Forcetech Comercio de Eletrônicos LTDA</p> 
+                            <p>CNPJ 28.655.997/0001-37</p> 
+                            <p> QS1, Rua 210, Lote 40, Torre B, Taguatinga Shopping</p> 
                         </div>
-
                     </section>
 
                     <section class="selos">
                         <div class="div_selos">
-                            <h1 class="titulo_selos"> Selos de Segurança</h1>    
-                            <div class="box_selos_a">
-                                <a id="seloEbit" class="box_selos" href="http://www.ebit.com.br/forcetech" target="_blank" data-noop="redir(this.href);"></a> 
-                                <script type="text/javascript" id="getSelo" src="https://imgs.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?92305"></script>
-                            </div>
-                            <div class="box_selos_a">
-                                <a href="" class="box_selos" >
-                                    <img src="<?= INCLUDE_PATH; ?>/img/icons/SELO ML PHT.png" alt=""/>
-                                </a>
-                            </div>
-                            <div class="box_selos_a">
-                                <a href="" class="box_selos" >
-                                    <img src="<?= INCLUDE_PATH; ?>/img/icons/selo-google.png" alt=""/>
-                                </a>
-                            </div>
+                            <h1 class="titulo_selos">Selos de Segurança</h1>
+                            <ul>
+                                <li>
+                                    <a id="seloEbit" class="box_selos" href="http://www.ebit.com.br/forcetech" target="_blank" data-noop="redir(this.href);">
+                                        <script type="text/javascript" id="getSelo" src="https://imgs.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?92305"></script>
+                                    </a>
+                                </li>                                
+                                <li>
+                                    <a href="https://perfil.mercadolivre.com.br/FORCETECH.LOJA" target="_blank" class="box_selos"><img src="<?= INCLUDE_PATH; ?>/img/icons/SELO ML PHT.png" alt="Selo" title="Selo"/></a>
+                                </li>
 
-                            <div class="box_selos_a">
-                                <a href="" class="box_selos" >
-                                    <img src="<?= INCLUDE_PATH; ?>/img/icons/selo-https.png" alt=""/>
-                                </a>
-                            </div>
+                                <li>
+                                    <a href="https://www.google.com.br/search?source=hp&ei=lVY2W_WWGYOWwASwv6CIBQ&q=forcetech&oq=f&gs_l=psy-ab.3.0.35i39k1l2j0i131k1l2j0i67k1j0i131k1j0l4.2876.2876.0.4781.2.1.0.0.0.0.158.158.0j1.1.0....0...1.1.64.psy-ab..1.1.158.0...0.jB-vc3xnQBs#lrd=0x935a32897c4fae07:0xe20ef7d884d167ee,1,,," class="box_selos" target="_blank"><img src="<?= INCLUDE_PATH; ?>/img/icons/selo-google.png" alt=""/></a>
+                                </li>
+
+                                <li>
+                                    <a href="" class="box_selos" target="_blank"><img src="<?= INCLUDE_PATH; ?>/img/icons/selo-https.png" alt=""/></a>
+                                </li>
+                            </ul>                          
                         </div>
 
                         <div class="bandeiras">
-                            <h1 class="titulo_cartao" > Formas de Pagamentos</h1>    
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/boleto.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqcartavisatraycheckout.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqelotraycheckout.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqitaushoplinetraycheckout.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqmastercardtraycheckout.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbbtraycheckout.png" alt=""/>
-                            </div>
-                            <div class="box_bandeira">
-                                <img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbradescotraycheckout.png" alt=""/>
-                            </div>
-                        </div>  
+                            <h1 class="titulo_cartao" > Formas de Pagamentos</h1>
+                            <ul>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/boleto.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqcartavisatraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqelotraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqitaushoplinetraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqmastercardtraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbbtraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbradescotraycheckout.png" alt=""/></li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <section class="selos2">
+                        <div class="div_selos row-selos">
+                            <h1 class="titulo_selos">Selos de Segurança</h1>
+                            <ul>
+                                <li>
+                                    <a id="seloEbit" class="box_selos" href="http://www.ebit.com.br/forcetech" target="_blank" data-noop="redir(this.href);">
+                                        <script type="text/javascript" id="getSelo" src="https://imgs.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?92305"></script>
+                                    </a>
+                                </li>                                
+                                <li>
+                                    <a href="#" class="box_selos"><img src="<?= INCLUDE_PATH; ?>/img/icons/SELO ML PHT.png" alt="Selo" title="Selo"/></a>
+                                </li>
+
+                                <li>
+                                    <a href="" class="box_selos" ><img src="<?= INCLUDE_PATH; ?>/img/icons/selo-google.png" alt=""/></a>
+                                </li>
+
+                                <li>
+                                    <a href="" class="box_selos" ><img src="<?= INCLUDE_PATH; ?>/img/icons/selo-https.png" alt=""/></a>
+                                </li>
+                            </ul>                          
+                        </div>
+
+                        <div class="bandeiras row-selos">
+                            <h1 class="titulo_cartao" > Formas de Pagamentos</h1>
+                            <ul>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/boleto.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqcartavisatraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqelotraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqitaushoplinetraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqmastercardtraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbbtraycheckout.png" alt=""/></li>
+                                <li><img src="<?= INCLUDE_PATH; ?>/img/icons/pag_peqtransfbradescotraycheckout.png" alt=""/></li>
+                            </ul>
+                        </div>
                     </section>
                 </div>
 
@@ -394,6 +405,13 @@
         <!--busca cep-->
         <script src="<?= HOME;?>/_cdn/buscarCep.js"></script>        
         
-        
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.0&appId=501983169994268&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     </body>
 </html>

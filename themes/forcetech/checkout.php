@@ -14,11 +14,11 @@ if (!$_SESSION["cod"] == 3):
 endif;
 
 //verifica se valor do frete é zero ou vazio
-if ($_SESSION['valor_Frete'] == '0' || $_SESSION['valor_Frete'] == ''):
-    $insertGoTo = HOME . '/carrinho';
-    echo"<script language='javascript' type='text/javascript'>alert('Fazer calculo do Frete!');</script>";
-    header("refresh:0;url={$insertGoTo}");
-endif;
+//if ($_SESSION['valor_Frete'] == '0' || $_SESSION['valor_Frete'] == ''):
+//    $insertGoTo = HOME . '/carrinho';
+//    echo"<script language='javascript' type='text/javascript'>alert('Fazer calculo do Frete!');</script>";
+//    header("refresh:0;url={$insertGoTo}");
+//endif;
 
 $produtosNoCarrinho = $carrinho->pegarProdutosDoCarrinho();
 //pegando o total do carrinho
@@ -84,10 +84,10 @@ $cartaoYear = filter_input(INPUT_POST, "name_card_year", FILTER_SANITIZE_STRING)
 $cartaoCvc = filter_input(INPUT_POST, "name_card_cvc", FILTER_SANITIZE_STRING);
 
 $data['token_account'] = $token;
-$data["customer"]["contacts"][0]["type_contact"] = "H";
-$data["customer"]["contacts"][0]["number_contact"] = "$entTelephone";
+//$data["customer"]["contacts"][0]["type_contact"] = "H";
+//$data["customer"]["contacts"][0]["number_contact"] = "";
 $data["customer"]["contacts"][1]["type_contact"] = "M";
-$data["customer"]["contacts"][1]["number_contact"] = "11999999999";
+$data["customer"]["contacts"][1]["number_contact"] = "$entTelephone";
 
 $data["customer"]["addresses"][0]["type_address"] = "B";
 $data["customer"]["addresses"][0]["postal_code"] = "$pegarCep";
@@ -178,7 +178,8 @@ if ($btnFinalizar):
     //cadastro do PedidoProduto no banco
 
     $data["transaction"]["price_discount"] = "0";
-    /* Dados para Pagamento Cartão Master */
+    //cadastro do PedidoProduto no banco
+    //METHOD ID DO PAGAMENTO EQUIVALE AO CARTÃO DE CREDITO    
     $data["payment"]["payment_method_id"] = "$cartaoBandeira";
     $data["payment"]["card_name"] = "$cartaoNome";
     $data["payment"]["card_number"] = "$cartaoNumber";
@@ -186,6 +187,7 @@ if ($btnFinalizar):
     $data["payment"]["card_expdate_year"] = "$cartaoYear";
     $data["payment"]["card_cvv"] = "$cartaoCvc";
     $data["payment"]["split"] = "$cartaoParcelas";
+        
 
     //SANDBOX URL
 //    $url = "https://api.intermediador.sandbox.yapay.com.br/api/v3/transactions/payment";
@@ -203,13 +205,13 @@ if ($btnFinalizar):
     $resposta = json_decode(ob_get_contents());
     $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     ob_end_clean();
-    curl_close($ch);
+    curl_close($ch);     
 
     if ($resposta) {
-        $redirect = "index";
+        $redirect = "minha-conta";
         echo "<script>alert('Pagamento efetuado com sucesso')</script>";
         header("refresh:1;url={$redirect}");
-        session_destroy();
+        
     } else {
         $redirect = 'login';
         header("refresh:1;url={$redirect}");
@@ -310,8 +312,7 @@ if ($btnBoleto):
         $pedidoProdutoController->AlterarBoleto($codYapay, $gerarBoleto);       
         
         echo "<script>alert('Boleto gerado com sucesso, estamos redirecionando para impressão do boleto!')</script>";
-        header("refresh:1;url={$redirect}");
-        session_destroy();
+        header("refresh:1;url={$redirect}");        
     } else {
         $redirect = 'login';
         header("refresh:1;url={$redirect}");
@@ -403,7 +404,7 @@ if ($btnDebito):
         $redirect = $resposta->data_response->transaction->payment->url_payment;
         echo "<script>alert('Estamos redirecionando para finalização do pedido!')</script>";
         header("refresh:1;url={$redirect}");
-        session_destroy();
+        
     } else {
         $redirect = 'login';
         header("refresh:1;url={$redirect}");
@@ -417,7 +418,8 @@ endif;
                 <form class="form" method="post">
                     <div class="form_title">
                         <h3><strong>1</strong>Detalhes Importantes</h3>
-                        <p>Alguns dados básicos</p>
+                        <p>Alguns dados básicos- <?php echo $cliente_documento;?></p>
+                        
                     </div>
 
                     <div class="step">                        
@@ -495,7 +497,7 @@ endif;
                     <div class="step">
                         <div class="row">
                             <div class="column column-12">
-                                <div class="cc-selector text-center">
+                                <div class="cc-selector">
                                     <input id="payment_card" class="payment_card" name="radio_pagamento" type="radio"/>
                                     <label class="drinkcard-cc visa" for="payment_card"></label>
 
@@ -517,10 +519,7 @@ endif;
                             <h3><strong>3</strong>Informações de Pagamento</h3>
                             <p>Você está em um ambiente seguro</p>
                         </div>
-
-
                         <div class="step">
-
                             <div class="row">
                                 <div class="column column-12">
                                     <div class="form-group">
@@ -713,22 +712,62 @@ endif;
 
                             </div>
 
-                            <aside class="column column-4">
-                                <h1>Estou testando</h1>
-                            </aside><!-- End aside -->
+                            <aside class="column column-4">                             
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <th>Quant</th>
+                                        <th>Produto</th>
+                                        <th>Valor</th>
+                                    </thead>
 
+                                    <tbody>
+                                       <?php
+                                        foreach ($produtosNoCarrinho as $produtoId => $quantidade):
+                                            $produtoCarrinho = $produtoController->retornaIdProduto($produtoId);
+                                        ?>
+                                        <tr>
+                                            <td><?= $quantidade; ?></td>
+                                            <td><?= $helper->limitarTexto($produtoCarrinho->getProduto_nome(), 40); ?></td>
+                                            <td>R$ <?= number_format($produtoCarrinho->getProduto_preco(), 2, ",", "."); ?></td>
+                                        </tr>                                    
+                                       <?php endforeach; ?>    
+                                    </tbody>
+                                </table>
+                                
+                                 <table class="table table-responsive">
+                                    <thead> 
+                                        <tr>                                            
+                                            <th>Frete</th>
+                                            <th>Tipo Frete</th>
+                                            <th>Valor do Pedido</th>                                            
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr>
+                                            <td>R$ <?= number_format($_SESSION['valor_Frete'], 2, ",", "."); ?></td>
+                                            <td><?= strtoupper($tipoFrete); ?></td>
+                                            <td>
+                                                <?php
+                                                $_SESSION['TotalPedido'] = $total + $_SESSION['valor_Frete'];
+                                                $pedidoFinal = $_SESSION['TotalPedido'];
+                                                ?>
+                                                R$ <?= number_format($pedidoFinal, 2, ",", "."); ?>
+                                            </td>
+                                        </tr>
 
-
+                                    </tbody>
+                                </table>
+                            </aside> 
                         </div>
                     </div>
-            </div>
-            <script src="<?= HOME;?>/_cdn/jquery-3.2.1.min.js"></script> 
-            <!--check boleto-->
-            <script src="<?= HOME;?>/_cdn/checkBoleto.js" type="text/javascript"></script>
-            <!--check cartão-->
-            <script src="<?= HOME;?>/_cdn/checkCartao.js" type="text/javascript"></script>
-            <!--check cartão-->
-            <script src="<?= HOME;?>/_cdn/checkDebito.js" type="text/javascript"></script>                  
-           
-            <script src="<?= HOME;?>/_cdn/validarPagamentoCartao.js"></script>
+</div>
+<script src="<?= HOME;?>/_cdn/jquery-3.2.1.min.js"></script> 
+<!--check boleto-->
+<script src="<?= HOME;?>/_cdn/checkBoleto.js" type="text/javascript"></script>
+<!--check cartão-->
+<script src="<?= HOME;?>/_cdn/checkCartao.js" type="text/javascript"></script>
+<!--check cartão-->
+<script src="<?= HOME;?>/_cdn/checkDebito.js" type="text/javascript"></script>                
+<script src="<?= HOME;?>/_cdn/validarPagamentoCartao.js"></script>
 

@@ -28,14 +28,14 @@ if ($btnCadastrar):
 
     if ($sliderController->Cadastrar($slider)):
         $resultado = '<div class="alert alert-success">
-                                            <button type="button" aria-hidden="true" class="close">×</button>
-                                            <span><b> Cadastro efetuado com sucesso - </b></span>
-                                        </div>';
+                        <button type="button" aria-hidden="true" class="close">×</button>
+                        <span><b> Cadastro efetuado com sucesso - </b></span>
+                    </div>';
     else:
         $resultado = '<div class="alert alert-danger">
-                                            <button type="button" aria-hidden="true" class="close">×</button>
-                                            <span><b> Erro ao cadastrar - Favor preencha todos os campos</b></span>
-                                        </div>';
+                        <button type="button" aria-hidden="true" class="close">×</button>
+                        <span><b> Erro ao cadastrar - Favor preencha todos os campos</b></span>
+                    </div>';
     endif;
 
 
@@ -51,10 +51,6 @@ endif;
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Cadastrar Slider</h4>
-                            <?php
-                                
-                            ?>
-                            
                         </div>
                         <div class="content">
                             <form method="post" enctype="multipart/form-data">
@@ -97,9 +93,10 @@ endif;
                                             <label>Slider</label>
                                             <select name="slSlider" class="form-control border-input">
                                                 <option value="">Selecione o slider</option>
-                                                <option value="g">Slider Grande</option>
-                                                <option value="m">Slider Médio</option>
-                                                <option value="p">Slider Pequeno</option>
+                                                <option value="Promoção">Promoção</option>
+                                                <option value="Grande">Grande</option>
+                                                <option value="Médio">Médio</option>
+                                                <option value="Pequeno">Pequeno</option>                                                
                                             </select>
                                         </div>
                                     </div>

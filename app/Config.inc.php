@@ -5,7 +5,8 @@ session_start();
 ob_start();
 
 /* * **********CONFIGURANTION URL***************** */
-define('HOME', 'https://localhost/works/cel');
+define('HOME', 'http://localhost/works/cel');
+define('BASEADMIN', 'http://localhost/works/cel/admin');
 //define('HOME', 'https://forcetech.com.br');
 define('THEME', 'forcetech');
 

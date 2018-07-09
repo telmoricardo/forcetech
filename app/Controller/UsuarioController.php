@@ -18,7 +18,12 @@ class UsuarioController {
 //        }
 //    }
     public function Cadastrar(Usuario $usuario) {
-        return $this->usuarioDAO->Cadastrar($usuario);
+        if (strlen($usuario->getNome()) >= 5 ):
+            return $this->usuarioDAO->Cadastrar($usuario);
+        else:
+            return false;
+        endif;
+        
     }
     //atualizar usuário
     public function Atualizar(Usuario $usuario) {
@@ -29,7 +34,12 @@ class UsuarioController {
     public function ListarUsuario($inicio = null, $quantidade = null) {
         return $this->usuarioDAO->ListarUsuario($inicio, $quantidade);
     }
-    
+    //excluir usuario
+    public function Excluir($cod) {
+        return $this->usuarioDAO->Excluir($cod);
+    }
+
+
     public function AutenticarUsuario($email, $senha, $nivel) {
         $senha = md5($senha);
         return $this->usuarioDAO->AutenticarUsuario($email, $senha, $nivel);
@@ -53,6 +63,9 @@ class UsuarioController {
     //retorna quantidade de usuarios
     public function RetornaQtdUser() {
         return $this->usuarioDAO->RetornaQtdUser();
+    }
+    public function verificarUsuario($cpf) {
+            return $this->usuarioDAO->verificarUsuario($cpf);
     }
 
 }

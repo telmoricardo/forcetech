@@ -12,6 +12,7 @@ $dataNasc = $helper->converteData(filter_input(INPUT_POST, "data_nasc", FILTER_S
 $usuario->setNascimento($dataNasc);
 $usuario->setEmail(filter_input(INPUT_POST, "txtEmail", FILTER_SANITIZE_STRING));
 $usuario->setDocumento(filter_input(INPUT_POST, "txtCpf", FILTER_SANITIZE_STRING));
+$cpf = $usuario->getDocumento();
 $usuario->setNivel(3);
 $usuario->setCelular(filter_input(INPUT_POST, "telephone_booking2", FILTER_SANITIZE_STRING));
 $usuario->setTelefone(filter_input(INPUT_POST, "telephone_booking", FILTER_SANITIZE_STRING));
@@ -28,11 +29,14 @@ $usuario->setSenha_cod(filter_input(INPUT_POST, "txtSenha2", FILTER_SANITIZE_STR
 $usuario->setData_log(date('Y-m-d H:i:s'));
 $usuario->setStatus(1);
 
-if ($usuarioController->Cadastrar($usuario)):
-    echo '<div class="msg-succes" style="margin-top: 8px;">Cadastrado com sucesso, redirecionando para página de login</div>';
+if($usuarioController->verificarUsuario($cpf)):
+     echo '<div class="msg-succes" style="margin-top: 8px;">Oppsss, o usuário já foi cadastrado!</div>';
 else:
-    echo '<div class="msg-danger" style="margin-top: 8px;">Erro ao cadastrar!</div>';
-    header('Location: '.HOME.'/cadastre');
+    echo 'Pode cadastrar';
+endif;
+
+if ($usuarioController->Cadastrar($usuario)):
+    echo '<div class="msg-succes" style="margin-top: 8px;">Cadastrado com sucesso, redirecionando para minha conta</div>';
 endif;
 
 

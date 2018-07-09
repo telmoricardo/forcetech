@@ -167,22 +167,47 @@ form input[type=submit]:hover{background: #089bad;}
 
 /*-------------------------FOOTER--------------------------*/
 .main_footer{float: left;}
-.main_footer section h1{width: 100%; font-weight: bold;font-size: 1.4em;margin-bottom: 10px;float: left;}
-.main_footer section .rede{float: left;}
-.main_footer section .titulo_social{margin: 20px 0;text-align: center;}
-.main_footer section .titulo_social{margin: 20px 0;text-align: center;}
-.main_footer section .box_rede{width: 40%; margin: 25px 0;}
-.main_footer section .box_rede .box{width: calc(33.33333333333333% - 20px);margin: 0 10px;float: left;}
-.main_footer section .box_rede .box img{width: 40px;transition: all 0.5s;    opacity: 0.85;filter: grayscale(100%); }
-.main_footer section .box_rede .box img:hover{filter: grayscale(0);}
-.main_footer section .quem_faz{width: 100%;font-size: 1.3em;font-weight: bold;text-align: center; float: left;}
 
-.main_footer section .selos{float: left;}
-.main_footer section .selos .titulo_selos{width: 100%;margin: 10px 0;float: left;}
-.main_footer section .bandeiras{float: left;}
-.main_footer section .bandeiras .titulo_cartao {width: 100%; margin: 20px 0;text-align: left;}
-.main_footer section p{width: 100%;font-size: 1.1em;line-height: 1.4;}
-.main_footer section p a:hover{color: #ff0000;}
+/*--- REDES SOCIAIS RODAPE ----*/
+.rede_social{width: 25%; float: left !important;}
+.box_rede{width: 100%; }
+.fb-root {
+  display: none;
+}
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+  width: 100% !important;
+}
+.box_rede ul li{display: inline;}
+.box_rede ul li img{width: 50px;}
+
+.sec_contato{width: 35%; float: left !important;  }
+.sec_contato .sec_contato_text{width: 90%; margin: 0 5%; }
+.sec_contato_text h1{font-size: 1.5em; margin-bottom: 15px;}
+.sec_contato_text p{font-size: 1.1em; margin-bottom: 10px;}
+.sec_contato_text .telefones{font-weight: bold; font-size: 1.3em;}
+
+.selos{width: 40%; float: left; }
+.div_selos{width: 100%; display: inline-block !important; float: left;}
+.div_selos h1{font-size: 1.5em; margin-bottom: 15px;}
+.div_selos ul li{display: inline;}
+.div_selos ul li a, .div_selos ul li img{width: 50px; float: left; margin-right: 8px;}
+
+.bandeiras{width: 100%; }
+.bandeiras h1{font-size: 1.5em; margin-bottom: 15px; float: left;}
+.bandeiras h1{font-size: 1.5em; margin-bottom: 15px; width: 100%;}
+.bandeiras ul li{display: inline;}
+.bandeiras ul li img{width: 50px; float: left; margin-right: 8px;}
+
+.nav_rodape{background: #686c6f;clear: both;}
+.nav_menu{text-align: center; }
+.nav_menu li{display: inline-block; padding: 8px 3px;}
+.nav_menu li a{color: #fff; font-size: 1.2em;}
+.nav_menu li a:hover{text-decoration: underline;}
+
+.selos2{width: 100%; float: left; display: none; }
+.selos2 .row-selos{width: calc(50% - 20px); margin: 0 10px; float: left;}
+
+
 
 /*---------------------BOX COPY----------------------*/
 .copy { background: #dddddd; padding: 18px 0 6px 0; /* margin-top: 30px; */ clear: both;}
@@ -300,6 +325,7 @@ img{max-width: 100%;margin-bottom: 10px;}
 .sec_central .titulo_central{width: 100%;float: left;text-align: center; font-size: 2em;font-weight: bold;color: #444; margin: 25px 0 50px 0;}
 .sec_central .titulo_central:after{content: ""; width: 100%; height: 1px; background: #dedede;display: block;}
 .sec_central .art_central{width: 100%;padding: 50px;}
+
 @media(max-width: 800px){
     .sec_central .art_central{padding: 10px;}
 }
@@ -394,50 +420,25 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
 .form-group {margin: 1.5em 0; }
 
 /*botões do checkout*/
+.cc-selector{width: 100%; float: left; }
 .cc-selector input{margin:0;padding:0;-webkit-appearance:none;-moz-appearance:none; appearance:none;}
 .cc-selector input{position:absolute;z-index:999;}
-.visa{background-image:url(../img/pagamento/pagamento-catao-credito.png);}
-.boleto{background-image:url(../img/pagamento/pagamento-boleto-bancario.png);}
-.debito{background-image:url(../img/pagamento/pagamento-debito.png);}
+.visa{background:url(../img/pagamento/pagamento-catao-credito.png); }
+.boleto{background:url(../img/pagamento/pagamento-boleto-bancario.png);}
+.debito{background:url(../img/pagamento/pagamento-debito.png);}
 .cc-selector input:active +.drinkcard-cc, .cc-selector input:active +.drinkcard-cc{opacity: .9;}
 .cc-selector input:checked +.drinkcard-cc, .cc-selector input:checked +.drinkcard-cc{-webkit-filter: none;-moz-filter: none;filter: none;}
-.drinkcard-cc{cursor:pointer;background-size:contain;background-repeat:no-repeat;display:inline-block;width:100px;height:70px;
-              -webkit-transition: all 100ms ease-in;-moz-transition: all 100ms ease-in;transition: all 100ms ease-in;-webkit-filter: brightness(1.8) grayscale(1) opacity(1);
-              -moz-filter: brightness(1.8) grayscale(1) opacity(1);filter: brightness(1.8) grayscale(1) opacity(2);}
+.drinkcard-cc{cursor:pointer;background-size:contain;background-repeat:no-repeat;display:inline-block;width:80px; height:80px; position: relative;}
 .drinkcard-cc:hover{-webkit-filter: brightness(1.2) grayscale(.5) opacity(.9); -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);filter: brightness(1.2) grayscale(.5) opacity(.9);}
 
 /* Extras */
 .cc-selector input{ margin: 5px 0 0 12px;}
 .cc-selector label{ margin-left: 7px; }
 
-.payment_card{border: none;}
+.payment_card{border: none; }
 .payment_boleto{border: none;}
 .payment_debito{border: none;}
-
-/*--- REDES SOCIAIS RODAPE ----*/
-.rede_social{width: 25%; float: left !important;}
-.sec_contato{width: 34%; float: left !important; margin-left: 1%;}
-.selos{width: 40%; float: left;}
-.div_selos{width: 100%; display: inline-block !important;}
-.selos .box_selos_a{margin: 0 2%; width: calc(25% -4%); float: left;}
-.selos .box_selos img{width: 50px;}
-.bandeiras{width: 100%; display: inline-block !important;}
-.bandeiras .box_bandeira{margin: 0 2%; width: calc(25% -4%); float: left;}
-.bandeiras .box_bandeira img{width: 50px;}
-
-.nav_rodape{background: #686c6f;clear: both;}
-.nav_menu{text-align: center; }
-.nav_menu li{display: inline-block; padding: 8px 3px;}
-.nav_menu li a{color: #fff;}
-.nav_menu li a:hover{text-decoration: underline;}
-
-
-
-
-
-
-
-
+.cc_card{position: absolute; float: left; bottom: -20px; left: 15px;}
 
 
 
@@ -453,7 +454,7 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .menu_produtos { padding: 0 7%;}
     /*    .outros .info_outros .box_info div .icone{position: relative; left: -100px;top: -10px;}
         .outros .info_outros .box_info div .txt_outros {position: relative; top: -20px;}*/
-     
+
 }
 
 /*------------------- MEDIA 1366px ---------------------*/
@@ -474,7 +475,6 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .main_cabecalho .box_usuario .conta .box_conta { padding-left: 0;}   
     .menu li {  left: -25px;}
     .menu_produtos {  padding: 0 6%;}
-
 }
 
 @media(max-width: 1281px ){
@@ -489,7 +489,6 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
 
 @media(max-width: 1156px ){
     .box_info .box_fa h1,.box_fa .txt_outros {  position: relative; text-align: right;  padding-right: 3px;}
-
     .main_footer section .box_rede {  margin: 35px 0;}
     .main_footer section .quem_faz { text-align: left;margin: 35px 0;}   
     .main_footer section p {width: 100%; font-size: 1.1em;float: left;}
@@ -508,12 +507,21 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .box_info .box_fa h1,.box_fa .txt_outros {  position: relative; text-align: right;  padding-right: 0;}        
 }
 
-@media(max-width: 1055px ){
-    .home-product-featured{margin-bottom: 25px;  float: left}
-}
 
 @media(max-width: 1110px ){
     .box_info .box_fa h1,.box_fa .icone {padding: 7px;}
+}
+@media(max-width: 1023px ){
+    .home-product-featured{width: calc(50% - 20px); margin: 0 10px; float: left;}
+    .home-product-featured:nth-of-type(3){display: none;}
+
+
+    .rede_social{width: 50%; float: left !important;} 
+    .sec_contato{width: 50%; float: left !important;  }
+    .selos{width: 40%; float: left; display: none;}    
+    .selos2{width: 100%; float: left; background-color: white; display: block; }
+    
+
 }
 
 @media(max-width: 1000px ){
@@ -534,6 +542,16 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .menu { width: calc(100% - 10px);}
     .newsletter h1 span{display: none;}    
     .product-item { width: 45%;  margin: 0 2.5%;}
+    .home-product-featured{width: 100%; float: left;}
+    .home-product-featured:nth-of-type(3){display: block;}
+}
+@media(max-width: 799px ){
+    .rede_social{width: 100%; float: left !important;} 
+    .sec_contato{width: 100%;  }
+    .sec_contato .sec_contato_text{width: 100%; margin: 0; padding: 0;}
+    /*.selos{width: 100%; float: left; display: block;}*/    
+    .selos2{width: 100%; margin-top: 3rem;}  
+    .selos2 .row-selos{width: 100%; margin-bottom: 8px;}
 }
 
 @media(max-width: 600px ){
@@ -561,7 +579,7 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     form input[type=submit]{width: 30%;}
 
     .newsletter .box_new_a{width: 100%;}
-    .newsletter .box_new_a h1{text-align: ce}
+    .newsletter .box_new_a h1{text-align: center;}
     .newsletter .box_new_b {  float: left; width: 100%;}
     .newsletter .box_new_b form .btn_newsletter{font-size: 0.9em;}
     .newsletter .form_news .email{width: 50%;}
@@ -591,6 +609,7 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .two_banner h1{width: 100%;clear: both !important;}
     .two_banner .wrapper{width: 100%;clear: both !important;}
     .home-product-featured h1 { text-align: center;}
+
     .newsletter{text-align: center;}
     .box_new_b p {display: none;}
     .newsletter .form{display: none;}
@@ -620,8 +639,6 @@ hr{width: 100%; margin-bottom: 1rem; margin-top: 1rem; border: 1px solid #ccc;}
     .product_images {width: 100%;}
     .selos .titulo_selos{margin-bottom: 15px;}
 
-    /*-----------------FOOTER REDE SOCIAL--------------*/
-    .rede_social{width: 100%;}
 
 }
 
